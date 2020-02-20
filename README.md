@@ -2,14 +2,14 @@
 
 The API for the Morum OSS project
 
-## To start locally
+### To start locally
 
 serverless offline start
 
-## To deploy
+### To deploy
 
 serverless deploy
 
-## To run tests locally
+### To run tests locally
 
 npm test
