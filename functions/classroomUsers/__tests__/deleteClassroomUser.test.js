@@ -1,6 +1,6 @@
+import crypto from "crypto";
 import { deleteClassroomUser } from "../deleteClassroomUser";
 import { connect } from "../../connect";
-const crypto = require("crypto");
 
 jest.mock("../../connect.js");
 

@@ -10,7 +10,7 @@ const mysql = require("serverless-mysql")({
 module.exports.connect = async query => {
   try {
     // Run query
-    let results = await mysql.query(query);
+    const results = await mysql.query(query);
 
     // Run clean up function
     await mysql.end();

@@ -15,9 +15,17 @@ org: singithikandage
 provider:
   name: aws
   runtime: nodejs12.x
-
-stage: production
-region: ca-central-1
+  stage: ${self:custom.currentStage}
+  region: ca-central-1
+  environment:
+    IS_OFFLINE: ${file(./config.${self:custom.currentStage}.json):IS_OFFLINE}
+    CONFIG_DYNAMODB_ENDPOINT: ${file(./config.${self:custom.currentStage}.json):CONFIG_DYNAMODB_ENDPOINT}
+    CONFIG_CLASSROOM_TABLE: ${file(./config.${self:custom.currentStage}.json):CONFIG_CLASSROOM_TABLE}
+    CONFIG_CLASSROOM_USER_TABLE: ${file(./config.${self:custom.currentStage}.json):CONFIG_CLASSROOM_USER_TABLE}
+    CONFIG_INSTANCE_TABLE: ${file(./config.${self:custom.currentStage}.json):CONFIG_INSTANCE_TABLE}
+    CONFIG_PROJECT_TABLE: ${file(./config.${self:custom.currentStage}.json):CONFIG_PROJECT_TABLE}
+    CONFIG_TEMPLATE_TABLE: ${file(./config.${self:custom.currentStage}.json):CONFIG_TEMPLATE_TABLE}
+    CONFIG_USER_TABLE: ${file(./config.${self:custom.currentStage}.json):CONFIG_USER_TABLE}
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
@@ -37,33 +45,38 @@ region: ca-central-1
 
 # packaging information
 package:
+  exclude:
+    - node_modules/**
+    - .dynamodb
+  include:
+    - functions/urls/**
   individually: true
 
 functions:
   # Classroom endpoints
   createClassroom:
-    handler: ./functions/classrooms/createClassroom.createClassroom
+    handler: ./functions/classrooms/createClassroom/createClassroom.createClassroom
     events:
       - http:
           path: classroom
           method: post
           cors: true
   getClassroom:
-    handler: ./functions/classrooms/getClassroom.getClassroom
+    handler: ./functions/classrooms/getClassroom/getClassroom.getClassroom
     events:
       - http:
           path: classroom/{id}
           method: get
           cors: true
   updateClassroom:
-    handler: ./functions/classrooms/updateClassroom.updateClassroom
+    handler: ./functions/classrooms/updateClassroom/updateClassroom.updateClassroom
     events:
       - http:
           path: classroom/{id}
           method: put
           cors: true
   deleteClassroom:
-    handler: ./functions/classrooms/deleteClassroom.deleteClassroom
+    handler: ./functions/classrooms/deleteClassroom/deleteClassroom.deleteClassroom
     events:
       - http:
           path: classroom/{id}
@@ -189,21 +202,109 @@ functions:
 
 # plugins
 plugins:
+  - serverless-dynamodb-local
   - serverless-offline
-  - serverless-dotenv-plugin
 
 custom:
+  defaultStage: dev
+  currentStage: ${opt:stage, self:custom.defaultStage}
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      heapInitial: 200m
+      heapMax: 1g
+      migrate: true
+      seed: true
+      convertEmptyValues: true
   serverless-offline:
     httpPort: 4000
-    
-# you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
-#  Outputs:
-#     NewOutput:
-#       Description: "Description for the output"
-#       Value: "Some output value"
+
+resources:
+  Resources:
+    classroomTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: classroom
+        AttributeDefinitions:
+          - AttributeName: classroomID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: classroomID
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    classroomUsersTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: classroomUser
+        AttributeDefinitions:
+          - AttributeName: classroomID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: classroomID
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    instanceTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: instance
+        AttributeDefinitions:
+          - AttributeName: instanceID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: instanceID
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    projectTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: project
+        AttributeDefinitions:
+          - AttributeName: projectID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: projectID
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    templateTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: template
+        AttributeDefinitions:
+          - AttributeName: templateID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: templateID
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    userTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: user
+        AttributeDefinitions:
+          - AttributeName: userID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userID
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

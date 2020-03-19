@@ -2,14 +2,24 @@
 
 The API for the Morum OSS project
 
-### To start locally
+## Setup
 
-serverless offline start
+npm install -g serverless
+cd morum-oss-api
+npm install
 
-### To deploy
+## To install serverless-dynamodb-local
 
-serverless deploy
+npm run install:dynamodb
 
-### To run tests locally
+## To start locally
+
+npm start
+
+## To run tests
 
 npm test
+
+## To deploy to production
+
+serverless deploy --stage prod

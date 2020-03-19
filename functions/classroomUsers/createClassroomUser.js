@@ -1,4 +1,4 @@
-const crypto = require("crypto");
+import crypto from "crypto";
 import { connect } from "../connect";
 import ClassroomUser from "../../models/classroomUser";
 

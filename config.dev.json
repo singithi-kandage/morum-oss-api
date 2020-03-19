@@ -1,0 +1,10 @@
+{
+  "IS_OFFLINE": true,
+  "CONFIG_DYNAMODB_ENDPOINT": "http://localhost:8000",
+  "CONFIG_CLASSROOM_TABLE": "classroom",
+  "CONFIG_CLASSROOM_USER_TABLE": "classroomUser",
+  "CONFIG_INSTANCE_TABLE": "instance",
+  "CONFIG_PROJECT_TABLE": "project",
+  "CONFIG_TEMPLATE_TABLE": "template",
+  "CONFIG_USER_TABLE": "user"
+}

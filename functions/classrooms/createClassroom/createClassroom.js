@@ -1,6 +1,10 @@
-const crypto = require("crypto");
-import { connect } from "../connect";
-import Classroom from "../../models/classroom";
+import crypto from "crypto";
+import Classroom from "../../../models/classroom";
+
+import { IS_OFFLINE } from "../../utils";
+
+import { insertIntoMysqlDB } from "./insertIntoMysqlDB";
+import { insertIntoDynamoDB } from "./insertIntoDynamoDB";
 
 module.exports.createClassroom = event => {
   const { ownerID, courseCode, company } = JSON.parse(event).body;
@@ -11,8 +15,9 @@ module.exports.createClassroom = event => {
 
   const classroom = new Classroom(classroomID, ownerID, courseCode, company);
 
-  // Initialize query
-  const query = `INSERT INTO classroom (classroomID, ownerID, courseCode, company) VALUES (${classroom.classroomID}, ${classroom.ownerID}, ${classroom.courseCode}, ${classroom.company});`;
+  if (IS_OFFLINE === true) {
+    return insertIntoMysqlDB(classroom);
+  }
 
-  return connect(query);
+  return insertIntoDynamoDB(classroom);
 };

@@ -8,6 +8,9 @@ jspm_packages
 # Environment variables
 .env
 
+# Database
+.dynamodb
+
 # Test Results
 testResults
 coverage
