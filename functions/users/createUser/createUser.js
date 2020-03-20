@@ -1,6 +1,9 @@
 import crypto from "crypto";
-import { connect } from "../connect";
-import User from "../../models/user";
+import User from "../../../models/user";
+
+import { insertIntoMysqlDB } from "./insertIntoMysqlDB";
+import { insertIntoDynamoDB } from "./insertIntoDynamoDB";
+import { IS_OFFLINE } from "../../utils";
 
 module.exports.createUser = async event => {
   const { email } = JSON.parse(event).body;
@@ -11,8 +14,9 @@ module.exports.createUser = async event => {
 
   const user = new User(userID, email);
 
-  // Initialize query
-  const query = `INSERT INTO user (userID, email) VALUES (${user.userID}, ${user.email});`;
+  if (IS_OFFLINE === true) {
+    return insertIntoMysqlDB(user);
+  }
 
-  return connect(query);
+  return insertIntoDynamoDB(user);
 };

@@ -2,21 +2,27 @@ import { CONFIG_CLASSROOM_TABLE, ReturnDocumentClient } from "../../utils";
 
 const documentClient = ReturnDocumentClient();
 
-module.exports.insertIntoDynamoDB = async classroom => {
+module.exports.insertIntoDynamoDB = async (userID, classroomID) => {
   // DynamoDB operation
   const params = {
     TableName: CONFIG_CLASSROOM_TABLE,
-    Item: {
-      classroomID: classroom.classroomID,
-      ownerID: classroom.ownerID,
-      courseCode: classroom.courseCode,
-      company: classroom.company
+    Key: { classroomID },
+    UpdateExpression: "SET #attrName = list_append(#attrName, :attrValue)",
+    ExpressionAttributeNames: {
+      "#attrName": "users"
     },
-    ConditionExpression: "attribute_not_exists(id)" // ensures that duplicate ids cannot be stored
+    ExpressionAttributeValues: {
+      ":attrValue": [
+        {
+          userID: userID
+        }
+      ]
+    },
+    ReturnValues: "UPDATED_NEW"
   };
 
   try {
-    const data = await documentClient.put(params).promise();
+    const data = await documentClient.update(params).promise();
     const response = {
       statusCode: 200
     };

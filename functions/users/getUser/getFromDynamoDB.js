@@ -1,12 +1,12 @@
-import { CONFIG_CLASSROOM_TABLE, ReturnDocumentClient } from "../../utils";
+import { CONFIG_USER_TABLE, ReturnDocumentClient } from "../../utils";
 
 const documentClient = ReturnDocumentClient();
 
-module.exports.getFromDynamoDB = async classroomID => {
+module.exports.getFromDynamoDB = async userID => {
   // DynamoDB operation
   const params = {
-    TableName: CONFIG_CLASSROOM_TABLE,
-    Key: { classroomID }
+    TableName: CONFIG_USER_TABLE,
+    Key: { userID }
   };
 
   try {
@@ -14,7 +14,7 @@ module.exports.getFromDynamoDB = async classroomID => {
     const data = await documentClient.get(params).promise();
     const response = {
       statusCode: 200,
-      body: JSON.stringify(data.Item.users)
+      body: JSON.stringify(data.Item)
     };
     return response;
   } catch (e) {

@@ -1,4 +1,4 @@
-import { getClassroomUser } from "../getClassroomUser";
+import { getUser } from "../getUser";
 import { IS_OFFLINE } from "../../../utils";
 import * as utils from "../../../utils";
 
@@ -21,23 +21,17 @@ afterEach(() => {
   getFromMysqlDB.mockReset();
 });
 
-test("Correctly gets classroomUser", async () => {
+test("Correctly gets user", async () => {
   utils.IS_OFFLINE = true;
 
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
-  const id = generateUUID();
-  const classroomID = generateUUID();
-  const index = 0;
+  const userID = generateUUID();
 
   const event = JSON.stringify({
-    pathParameters: id,
-    body: {
-      classroomID: classroomID,
-      index: index
-    }
+    pathParameters: userID
   });
 
-  const result = await getClassroomUser(event);
+  const result = await getUser(event);
 
   expect(IS_OFFLINE).toBe(true);
   expect(result).toEqual(expected);
@@ -47,19 +41,13 @@ test("getFromDynamoDB is called", async () => {
   utils.IS_OFFLINE = false;
 
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
-  const id = generateUUID();
-  const classroomID = generateUUID();
-  const index = 0;
+  const userID = generateUUID();
 
   const event = JSON.stringify({
-    pathParameters: id,
-    body: {
-      classroomID: classroomID,
-      index: index
-    }
+    pathParameters: userID
   });
 
-  await getClassroomUser(event);
+  await getUser(event);
 
   expect(IS_OFFLINE).toBe(false);
   expect(getFromDynamoDB).toBeCalledTimes(1);
@@ -70,19 +58,13 @@ test("getFromMysqlDB is called", async () => {
   utils.IS_OFFLINE = true;
 
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
-  const id = generateUUID();
-  const classroomID = generateUUID();
-  const index = 0;
+  const userID = generateUUID();
 
   const event = JSON.stringify({
-    pathParameters: id,
-    body: {
-      classroomID: classroomID,
-      index: index
-    }
+    pathParameters: userID
   });
 
-  await getClassroomUser(event);
+  await getUser(event);
 
   expect(IS_OFFLINE).toBe(true);
   expect(getFromDynamoDB).toBeCalledTimes(0);

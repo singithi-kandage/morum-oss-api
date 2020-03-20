@@ -1,10 +1,10 @@
 import crypto from "crypto";
 import { deleteFromDynamoDB } from "../deleteFromDynamoDB";
-import { CONFIG_CLASSROOM_TABLE } from "../../../utils";
+import { CONFIG_USER_TABLE } from "../../../utils";
 import * as utils from "../../../utils";
 
-test("deleteFromDynamoDB is correctly called", async () => {
-  utils.CONFIG_CLASSROOM_TABLE = "classroom";
+test("insertIntoDynamoDB is correctly called", async () => {
+  utils.CONFIG_USER_TABLE = "user";
 
   const expected = { statusCode: 500 };
 
@@ -14,6 +14,6 @@ test("deleteFromDynamoDB is correctly called", async () => {
 
   const result = await deleteFromDynamoDB(classroomID);
 
-  expect(CONFIG_CLASSROOM_TABLE).toBe("classroom");
+  expect(CONFIG_USER_TABLE).toBe("user");
   expect(expected).toEqual(result);
 });

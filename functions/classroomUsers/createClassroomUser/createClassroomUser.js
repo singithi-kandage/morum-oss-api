@@ -19,5 +19,5 @@ module.exports.createClassroomUser = async event => {
     return insertIntoMysqlDB(classroomUser);
   }
 
-  //return insertIntoDynamoDB(classroomUser);
+  return insertIntoDynamoDB(userID, classroomID);
 };

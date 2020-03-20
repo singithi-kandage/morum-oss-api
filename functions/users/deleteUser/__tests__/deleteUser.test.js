@@ -1,4 +1,4 @@
-import { deleteClassroomUser } from "../deleteClassroomUser";
+import { deleteUser } from "../deleteUser";
 import { IS_OFFLINE } from "../../../utils";
 import * as utils from "../../../utils";
 
@@ -21,23 +21,17 @@ afterEach(() => {
   deleteFromMysqlDB.mockReset();
 });
 
-test("Correctly deletes classroomUser", async () => {
+test("Correctly deletes user", async () => {
   utils.IS_OFFLINE = true;
 
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
-  const id = generateUUID();
-  const classroomID = generateUUID();
-  const index = 0;
+  const userID = generateUUID();
 
   const event = JSON.stringify({
-    pathParameters: id,
-    body: {
-      classroomID: classroomID,
-      index: index
-    }
+    pathParameters: userID
   });
 
-  const result = await deleteClassroomUser(event);
+  const result = await deleteUser(event);
 
   expect(IS_OFFLINE).toBe(true);
   expect(result).toEqual(expected);
@@ -47,19 +41,13 @@ test("deleteFromDynamoDB is called", async () => {
   utils.IS_OFFLINE = false;
 
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
-  const id = generateUUID();
-  const classroomID = generateUUID();
-  const index = 0;
+  const userID = generateUUID();
 
   const event = JSON.stringify({
-    pathParameters: id,
-    body: {
-      classroomID: classroomID,
-      index: index
-    }
+    pathParameters: userID
   });
-  
-  await deleteClassroomUser(event);
+
+  await deleteUser(event);
 
   expect(IS_OFFLINE).toBe(false);
   expect(deleteFromDynamoDB).toBeCalledTimes(1);
@@ -70,18 +58,13 @@ test("deleteFromMysqlDB is called", async () => {
   utils.IS_OFFLINE = true;
 
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
-  const id = generateUUID();
-  const classroomID = generateUUID();
-  const index = 0;
+  const userID = generateUUID();
 
   const event = JSON.stringify({
-    pathParameters: id,
-    body: {
-      classroomID: classroomID,
-      index: index
-    }
+    pathParameters: userID
   });
-  await deleteClassroomUser(event);
+
+  await deleteUser(event);
 
   expect(IS_OFFLINE).toBe(true);
   expect(deleteFromDynamoDB).toBeCalledTimes(0);

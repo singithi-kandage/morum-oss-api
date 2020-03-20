@@ -11,8 +11,9 @@ test("deleteFromDynamoDB is correctly called", async () => {
   // Generate unique id with no external dependencies
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const classroomID = generateUUID();
+  const index = 0;
 
-  const result = await deleteFromDynamoDB(classroomID);
+  const result = await deleteFromDynamoDB(classroomID, index);
 
   expect(CONFIG_CLASSROOM_TABLE).toBe("classroom");
   expect(expected).toEqual(result);

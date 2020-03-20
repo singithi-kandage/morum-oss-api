@@ -1,18 +1,18 @@
-import { CONFIG_CLASSROOM_TABLE, ReturnDocumentClient } from "../../utils";
+import { CONFIG_USER_TABLE, ReturnDocumentClient } from "../../utils";
 
 const documentClient = ReturnDocumentClient();
 
-module.exports.updateDynamoDB = async (userID, classroomID, id) => {
+module.exports.insertIntoDynamoDB = async user => {
   // DynamoDB operation
   const params = {
-    TableName: CONFIG_CLASSROOM_TABLE,
+    TableName: CONFIG_USER_TABLE,
     Item: {
-      classroomID: id,
-      ownerID: ownerID,
-      courseCode: courseCode,
-      company: company
-    }
+      userID: user.userID,
+      email: user.email
+    },
+    ConditionExpression: "attribute_not_exists(id)" // ensures that duplicate ids cannot be stored
   };
+
   try {
     const data = await documentClient.put(params).promise();
     const response = {

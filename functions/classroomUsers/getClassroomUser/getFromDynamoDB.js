@@ -2,7 +2,7 @@ import { CONFIG_CLASSROOM_TABLE, ReturnDocumentClient } from "../../utils";
 
 const documentClient = ReturnDocumentClient();
 
-module.exports.getFromDynamoDB = async classroomID => {
+module.exports.getFromDynamoDB = async (classroomID, index) => {
   // DynamoDB operation
   const params = {
     TableName: CONFIG_CLASSROOM_TABLE,
@@ -14,7 +14,7 @@ module.exports.getFromDynamoDB = async classroomID => {
     const data = await documentClient.get(params).promise();
     const response = {
       statusCode: 200,
-      body: JSON.stringify(data.Item)
+      body: JSON.stringify(data.Item.users[index])
     };
     return response;
   } catch (e) {
