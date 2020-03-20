@@ -1,6 +1,9 @@
 import crypto from "crypto";
-import { connect } from "../connect";
-import Project from "../../models/project";
+import Project from "../../../models/project";
+
+import { insertIntoMysqlDB } from "./insertIntoMysqlDB";
+import { insertIntoDynamoDB } from "./insertIntoDynamoDB";
+import { IS_OFFLINE } from "../../utils";
 
 module.exports.createProject = async event => {
   const { containerID, templateID, classroomID } = JSON.parse(event).body;
@@ -11,8 +14,9 @@ module.exports.createProject = async event => {
 
   const project = new Project(projectID, containerID, templateID, classroomID);
 
-  // Initialize query
-  const query = `INSERT INTO project (projectID, containerID, templateID, classroomID) VALUES (${project.projectID}, ${project.containerID},  ${project.templateID}, ${project.classroomID});`;
+  if (IS_OFFLINE === true) {
+    return insertIntoMysqlDB(project);
+  }
 
-  return connect(query);
+  return insertIntoDynamoDB(project);
 };
