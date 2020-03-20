@@ -84,35 +84,35 @@ functions:
           cors: true
   # Classroom Users endpoints
   createClassroomUser:
-    handler: ./functions/classroomUsers/createClassroomUser.createClassroomUser
+    handler: ./functions/classroomUsers/createClassroomUser/createClassroomUser.createClassroomUser
     events:
       - http:
           path: classroomUser
           method: post
           cors: true
   getClassroomUsers:
-    handler: ./functions/classroomUsers/getClassroomUser.getClassroomUsers
+    handler: ./functions/classroomUsers/getClassroomUsers/getClassroomUsers.getClassroomUsers
     events:
       - http:
           path: classroomUser/getAllUsers/{classroomID}
           method: get
           cors: true
   getClassroomUser:
-    handler: ./functions/classroomUsers/getClassroomUser.getClassroomUser
+    handler: ./functions/classroomUsers/getClassroomUser/getClassroomUser.getClassroomUser
     events:
       - http:
           path: classroomUser/getUser/{id}
           method: get
           cors: true
   updateClassroomUser:
-    handler: ./functions/classroomUsers/updateClassroomUser.updateClassroomUser
+    handler: ./functions/classroomUsers/updateClassroomUser/updateClassroomUser.updateClassroomUser
     events:
       - http:
           path: classroomUser/{id}
           method: put
           cors: true
   deleteClassroomUser:
-    handler: ./functions/classroomUsers/deleteClassroomUser.deleteClassroomUser
+    handler: ./functions/classroomUsers/deleteClassroomUser/deleteClassroomUser.deleteClassroomUser
     events:
       - http:
           path: classroomUser/{id}

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "serverless offline start --stage dev",
     "install:dynamodb": "serverless dynamodb install --migrate",
-    "test": "serverless-bundle test --coverage --outputFile=./testResults/testResults.json"
+    "test": "serverless-bundle test --coverage --collectCoverageFrom=functions/**/**/*.js  --outputFile=./testResults/testResults.json"
   },
   "author": "Singithi Kandage, Aaron Bassett, Sean Dunham",
   "license": "ISC",

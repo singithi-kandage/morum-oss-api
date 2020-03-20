@@ -1,10 +1,9 @@
 import crypto from "crypto";
 import Classroom from "../../../models/classroom";
 
-import { IS_OFFLINE } from "../../utils";
-
 import { insertIntoMysqlDB } from "./insertIntoMysqlDB";
 import { insertIntoDynamoDB } from "./insertIntoDynamoDB";
+import { IS_OFFLINE } from "../../utils";
 
 module.exports.createClassroom = event => {
   const { ownerID, courseCode, company } = JSON.parse(event).body;
