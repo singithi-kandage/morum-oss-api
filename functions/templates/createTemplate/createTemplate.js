@@ -1,6 +1,9 @@
 import crypto from "crypto";
-import { connect } from "../connect";
-import Template from "../../models/template";
+import Template from "../../../models/template";
+
+import { insertIntoMysqlDB } from "./insertIntoMysqlDB";
+import { insertIntoDynamoDB } from "./insertIntoDynamoDB";
+import { IS_OFFLINE } from "../../utils";
 
 module.exports.createTemplate = async event => {
   const { name } = JSON.parse(event).body;
@@ -11,8 +14,9 @@ module.exports.createTemplate = async event => {
 
   const template = new Template(templateID, name);
 
-  // Initialize query
-  const query = `INSERT INTO template (templateID, name) VALUES (${template.templateID}, ${template.name});`;
+  if (IS_OFFLINE === true) {
+    return insertIntoMysqlDB(template);
+  }
 
-  return connect(query);
+  return insertIntoDynamoDB(template);
 };
