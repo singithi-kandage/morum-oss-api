@@ -9,5 +9,5 @@ module.exports.deleteInstance = async event => {
     return deleteFromMysqlDB(id);
   }
 
-  //return deleteFromDynamoDB(id);
+  return deleteFromDynamoDB(id);
 };

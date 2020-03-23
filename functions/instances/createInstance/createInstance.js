@@ -18,5 +18,5 @@ module.exports.createInstance = async event => {
     return insertIntoMysqlDB(instance);
   }
 
-  //return insertIntoDynamoDB(instance);
+  return insertIntoDynamoDB(instance);
 };

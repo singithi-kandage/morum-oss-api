@@ -1,12 +1,12 @@
-import { CONFIG_CLASSROOM_TABLE, ReturnDocumentClient } from "../../utils";
+import { CONFIG_INSTANCE_TABLE, ReturnDocumentClient } from "../../utils";
 
 const documentClient = ReturnDocumentClient();
 
-module.exports.getFromDynamoDB = async classroomID => {
+module.exports.getFromDynamoDB = async instanceID => {
   // DynamoDB operation
   const params = {
-    TableName: CONFIG_CLASSROOM_TABLE,
-    Key: { classroomID }
+    TableName: CONFIG_INSTANCE_TABLE,
+    Key: { instanceID }
   };
 
   try {

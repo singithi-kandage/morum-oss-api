@@ -37,22 +37,22 @@ test("Correctly deletes instance", async () => {
   expect(result).toEqual(expected);
 });
 
-// test("deleteFromDynamoDB is called", async () => {
-//   utils.IS_OFFLINE = false;
+test("deleteFromDynamoDB is called", async () => {
+  utils.IS_OFFLINE = false;
 
-//   const generateUUID = () => crypto.randomBytes(16).toString("hex");
-//   const id = generateUUID();
+  const generateUUID = () => crypto.randomBytes(16).toString("hex");
+  const instanceID = generateUUID();
 
-//   const event = JSON.stringify({
-//     pathParameters: id
-//   });
+  const event = JSON.stringify({
+    pathParameters: instanceID
+  });
 
-//   await deleteClassroom(event);
+  await deleteInstance(event);
 
-//   expect(IS_OFFLINE).toBe(false);
-//   expect(deleteFromDynamoDB).toBeCalledTimes(1);
-//   expect(deleteFromMysqlDB).toBeCalledTimes(0);
-// });
+  expect(IS_OFFLINE).toBe(false);
+  expect(deleteFromDynamoDB).toBeCalledTimes(1);
+  expect(deleteFromMysqlDB).toBeCalledTimes(0);
+});
 
 test("deleteFromMysqlDB is called", async () => {
   utils.IS_OFFLINE = true;

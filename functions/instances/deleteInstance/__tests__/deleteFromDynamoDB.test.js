@@ -1,19 +1,19 @@
 import crypto from "crypto";
 import { deleteFromDynamoDB } from "../deleteFromDynamoDB";
-import { CONFIG_CLASSROOM_TABLE } from "../../../utils";
+import { CONFIG_INSTANCE_TABLE } from "../../../utils";
 import * as utils from "../../../utils";
 
 test("deleteFromDynamoDB is correctly called", async () => {
-  utils.CONFIG_CLASSROOM_TABLE = "classroom";
+  utils.CONFIG_INSTANCE_TABLE = "instance";
 
   const expected = { statusCode: 500 };
 
   // Generate unique id with no external dependencies
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
-  const id = generateUUID();
+  const instanceID = generateUUID();
 
-  const result = await deleteFromDynamoDB(id);
+  const result = await deleteFromDynamoDB(instanceID);
 
-  expect(CONFIG_CLASSROOM_TABLE).toBe("classroom");
+  expect(CONFIG_INSTANCE_TABLE).toBe("instance");
   expect(expected).toEqual(result);
 });

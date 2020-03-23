@@ -120,21 +120,21 @@ functions:
           cors: true
   # Instances endpoints
   createInstance:
-    handler: ./functions/instances/createInstance.createInstance
+    handler: ./functions/instances/createInstance/createInstance.createInstance
     events:
       - http:
           path: instance
           method: post
           cors: true
   getInstance:
-    handler: ./functions/instances/getInstance.getInstance
+    handler: ./functions/instances/getInstance/getInstance.getInstance
     events:
       - http:
           path: instance/{id}
           method: get
           cors: true
   deleteInstance:
-    handler: ./functions/instances/deleteInstance.deleteInstance
+    handler: ./functions/instances/deleteInstance/deleteInstance.deleteInstance
     events:
       - http:
           path: instance/{id}
@@ -142,21 +142,21 @@ functions:
           cors: true
   # Projects endpoints
   createProjects:
-    handler: ./functions/projects/createProject.createProject
+    handler: ./functions/projects/createProject/createProject.createProject
     events:
       - http:
           path: project
           method: post
           cors: true
   getProject:
-    handler: ./functions/projects/getProject.getProject
+    handler: ./functions/projects/getProject/getProject.getProject
     events:
       - http:
           path: project/{id}
           method: get
           cors: true
   deleteProject:
-    handler: ./functions/projects/deleteProject.deleteProject
+    handler: ./functions/projects/deleteProject/deleteProject.deleteProject
     events:
       - http:
           path: project/{id}
@@ -164,14 +164,14 @@ functions:
           cors: true
   # Templates endpoints
   createTemplate:
-    handler: ./functions/template/createTemplate.createTemplate
+    handler: ./functions/template/createTemplate/createTemplate.createTemplate
     events:
       - http:
           path: template
           method: post
           cors: true
   getTemplate:
-    handler: ./functions/template/getTemplate.getProject
+    handler: ./functions/template/getTemplate/getTemplate.getProject
     events:
       - http:
           path: template/{id}
@@ -179,21 +179,21 @@ functions:
           cors: true
   # User endpoints
   createUser:
-    handler: ./functions/users/createUser.createUser
+    handler: ./functions/users/createUser/createUser.createUser
     events:
       - http:
           path: user
           method: post
           cors: true
   getUser:
-    handler: ./functions/users/getUser.getUser
+    handler: ./functions/users/getUser/getUser.getUser
     events:
       - http:
           path: user/{id}
           method: get
           cors: true
   deleteUser:
-    handler: ./functions/user/deleteUser.deleteUser
+    handler: ./functions/user/deleteUser/deleteUser.deleteUser
     events:
       - http:
           path: user/{id}

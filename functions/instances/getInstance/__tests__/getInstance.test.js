@@ -37,22 +37,22 @@ test("Correctly gets instance", async () => {
   expect(result).toEqual(expected);
 });
 
-// test("getFromDynamoDB is called", async () => {
-//   utils.IS_OFFLINE = false;
+test("getFromDynamoDB is called", async () => {
+  utils.IS_OFFLINE = false;
 
-//   const generateUUID = () => crypto.randomBytes(16).toString("hex");
-//   const id = generateUUID();
+  const generateUUID = () => crypto.randomBytes(16).toString("hex");
+  const instanceID = generateUUID();
 
-//   const event = JSON.stringify({
-//     pathParameters: id
-//   });
+  const event = JSON.stringify({
+    pathParameters: instanceID
+  });
 
-//   await getClassroom(event);
+  await getInstance(event);
 
-//   expect(IS_OFFLINE).toBe(false);
-//   expect(getFromDynamoDB).toBeCalledTimes(1);
-//   expect(getFromMysqlDB).toBeCalledTimes(0);
-// });
+  expect(IS_OFFLINE).toBe(false);
+  expect(getFromDynamoDB).toBeCalledTimes(1);
+  expect(getFromMysqlDB).toBeCalledTimes(0);
+});
 
 test("getFromMysqlDB is called", async () => {
   utils.IS_OFFLINE = true;
@@ -70,4 +70,3 @@ test("getFromMysqlDB is called", async () => {
   expect(getFromDynamoDB).toBeCalledTimes(0);
   expect(getFromMysqlDB).toBeCalledTimes(1);
 });
-

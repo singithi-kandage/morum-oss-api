@@ -2,15 +2,18 @@ import { CONFIG_CLASSROOM_USER_TABLE, ReturnDocumentClient } from "../../utils";
 
 const documentClient = ReturnDocumentClient();
 
-module.exports.deleteFromDynamoDB = async id => {
+module.exports.updateDynamoDB = async (userID, classroomID, id) => {
   // DynamoDB operation
   const params = {
     TableName: CONFIG_CLASSROOM_USER_TABLE,
-    Key: { id }
+    Item: {
+      id: id,
+      classroomID: classroomID,
+      userID: userID
+    }
   };
-
   try {
-    const data = await documentClient.delete(params).promise();
+    const data = await documentClient.put(params).promise();
     const response = {
       statusCode: 200
     };
