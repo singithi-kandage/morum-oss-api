@@ -2,7 +2,7 @@ import { updateMysqlDB } from "./updateMysqlDB";
 import { updateDynamoDB } from "./updateDynamoDB";
 import { IS_OFFLINE } from "../../utils";
 
-module.exports.updateClassroom = async event => {
+export const updateClassroom = async event => {
   const id = event.pathParameters.id;
   const { ownerID, courseCode, company } = JSON.parse(event.body);
 
@@ -12,3 +12,5 @@ module.exports.updateClassroom = async event => {
 
   return updateDynamoDB(ownerID, courseCode, company, id);
 };
+
+export default { updateClassroom };

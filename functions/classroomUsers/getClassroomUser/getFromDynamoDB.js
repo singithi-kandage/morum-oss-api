@@ -2,7 +2,7 @@ import { CONFIG_CLASSROOM_USER_TABLE, ReturnDocumentClient } from "../../utils";
 
 const documentClient = ReturnDocumentClient();
 
-module.exports.getFromDynamoDB = async id => {
+export const getFromDynamoDB = async id => {
   // DynamoDB operation
   const params = {
     TableName: CONFIG_CLASSROOM_USER_TABLE,
@@ -23,3 +23,5 @@ module.exports.getFromDynamoDB = async id => {
     };
   }
 };
+
+export default { getFromDynamoDB };

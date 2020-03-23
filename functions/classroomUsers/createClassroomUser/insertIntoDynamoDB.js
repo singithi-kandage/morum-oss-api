@@ -3,7 +3,7 @@ import ClassroomUser from "../../../models/classroomUser";
 
 const documentClient = ReturnDocumentClient();
 
-module.exports.insertIntoDynamoDB = async classroomUser => {
+export const insertIntoDynamoDB = async classroomUser => {
   // DynamoDB operation
   const params = {
     TableName: CONFIG_CLASSROOM_USER_TABLE,
@@ -27,3 +27,5 @@ module.exports.insertIntoDynamoDB = async classroomUser => {
     };
   }
 };
+
+export default { insertIntoDynamoDB };

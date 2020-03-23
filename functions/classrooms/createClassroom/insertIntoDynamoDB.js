@@ -2,7 +2,7 @@ import { CONFIG_CLASSROOM_TABLE, ReturnDocumentClient } from "../../utils";
 
 const documentClient = ReturnDocumentClient();
 
-module.exports.insertIntoDynamoDB = async classroom => {
+export const insertIntoDynamoDB = async classroom => {
   // DynamoDB operation
   const params = {
     TableName: CONFIG_CLASSROOM_TABLE,
@@ -27,3 +27,5 @@ module.exports.insertIntoDynamoDB = async classroom => {
     };
   }
 };
+
+export default { insertIntoDynamoDB };

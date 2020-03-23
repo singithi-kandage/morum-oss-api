@@ -5,7 +5,7 @@ import { insertIntoMysqlDB } from "./insertIntoMysqlDB";
 import { insertIntoDynamoDB } from "./insertIntoDynamoDB";
 import { IS_OFFLINE } from "../../utils";
 
-module.exports.createInstance = async event => {
+export const createInstance = async event => {
   const { projectID, userID } = JSON.parse(event.body);
 
   // Generate unique id with no external dependencies
@@ -20,3 +20,5 @@ module.exports.createInstance = async event => {
 
   return insertIntoDynamoDB(instance);
 };
+
+export default { createInstance };

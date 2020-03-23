@@ -2,7 +2,7 @@ import { CONFIG_CLASSROOM_USER_TABLE, ReturnDocumentClient } from "../../utils";
 
 const documentClient = ReturnDocumentClient();
 
-module.exports.deleteFromDynamoDB = async id => {
+export const deleteFromDynamoDB = async id => {
   // DynamoDB operation
   const params = {
     TableName: CONFIG_CLASSROOM_USER_TABLE,
@@ -21,3 +21,5 @@ module.exports.deleteFromDynamoDB = async id => {
     };
   }
 };
+
+export default { deleteFromDynamoDB };

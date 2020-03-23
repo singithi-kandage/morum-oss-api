@@ -2,7 +2,7 @@ import { CONFIG_PROJECT_TABLE, ReturnDocumentClient } from "../../utils";
 
 const documentClient = ReturnDocumentClient();
 
-module.exports.deleteFromDynamoDB = async projectID => {
+export const deleteFromDynamoDB = async projectID => {
   // DynamoDB operation
   const params = {
     TableName: CONFIG_PROJECT_TABLE,
@@ -21,3 +21,5 @@ module.exports.deleteFromDynamoDB = async projectID => {
     };
   }
 };
+
+export default { deleteFromDynamoDB };

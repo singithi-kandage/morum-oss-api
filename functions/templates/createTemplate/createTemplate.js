@@ -5,7 +5,7 @@ import { insertIntoMysqlDB } from "./insertIntoMysqlDB";
 import { insertIntoDynamoDB } from "./insertIntoDynamoDB";
 import { IS_OFFLINE } from "../../utils";
 
-module.exports.createTemplate = async event => {
+export const createTemplate = async event => {
   const { name } = JSON.parse(event.body);
 
   // Generate unique id with no external dependencies
@@ -20,3 +20,5 @@ module.exports.createTemplate = async event => {
 
   return insertIntoDynamoDB(template);
 };
+
+export default { createTemplate };

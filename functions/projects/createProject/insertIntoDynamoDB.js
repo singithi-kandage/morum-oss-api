@@ -2,7 +2,7 @@ import { CONFIG_PROJECT_TABLE, ReturnDocumentClient } from "../../utils";
 
 const documentClient = ReturnDocumentClient();
 
-module.exports.insertIntoDynamoDB = async project => {
+export const insertIntoDynamoDB = async project => {
   // DynamoDB operation
   const params = {
     TableName: CONFIG_PROJECT_TABLE,
@@ -27,3 +27,5 @@ module.exports.insertIntoDynamoDB = async project => {
     };
   }
 };
+
+export default { insertIntoDynamoDB };

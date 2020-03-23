@@ -6,7 +6,7 @@ import { insertIntoDynamoDB } from "./insertIntoDynamoDB";
 
 import { IS_OFFLINE } from "../../utils";
 
-module.exports.createClassroomUser = async event => {
+export const createClassroomUser = async event => {
   const { userID, classroomID } = JSON.parse(event.body);
 
   // Generate unique id with no external dependencies
@@ -21,3 +21,5 @@ module.exports.createClassroomUser = async event => {
 
   return insertIntoDynamoDB(userID, classroomID);
 };
+
+export default { createClassroomUser };

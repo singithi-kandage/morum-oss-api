@@ -2,7 +2,7 @@ import { deleteFromMysqlDB } from "./deleteFromMysqlDB";
 import { deleteFromDynamoDB } from "./deleteFromDynamoDB";
 import { IS_OFFLINE } from "../../utils";
 
-module.exports.deleteClassroom = async event => {
+export const deleteClassroom = async event => {
   const classroomID = event.pathParameters.id;
 
   if (IS_OFFLINE === true) {
@@ -11,3 +11,5 @@ module.exports.deleteClassroom = async event => {
 
   return deleteFromDynamoDB(classroomID);
 };
+
+export default { deleteClassroom };

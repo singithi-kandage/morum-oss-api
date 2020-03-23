@@ -2,7 +2,7 @@ import { CONFIG_CLASSROOM_TABLE, ReturnDocumentClient } from "../../utils";
 
 const documentClient = ReturnDocumentClient();
 
-module.exports.updateDynamoDB = async (ownerID, courseCode, company, id) => {
+export const updateDynamoDB = async (ownerID, courseCode, company, id) => {
   // DynamoDB operation
   const params = {
     TableName: CONFIG_CLASSROOM_TABLE,
@@ -25,3 +25,5 @@ module.exports.updateDynamoDB = async (ownerID, courseCode, company, id) => {
     };
   }
 };
+
+export default { updateDynamoDB };

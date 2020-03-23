@@ -5,7 +5,7 @@ import { insertIntoMysqlDB } from "./insertIntoMysqlDB";
 import { insertIntoDynamoDB } from "./insertIntoDynamoDB";
 import { IS_OFFLINE } from "../../utils";
 
-module.exports.createClassroom = event => {
+export const createClassroom = event => {
   const { ownerID, courseCode, company } = JSON.parse(event.body);
 
   // Generate unique id with no external dependencies
@@ -20,3 +20,5 @@ module.exports.createClassroom = event => {
 
   return insertIntoDynamoDB(classroom);
 };
+
+export default { createClassroom };

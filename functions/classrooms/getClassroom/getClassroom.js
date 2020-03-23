@@ -2,7 +2,7 @@ import { getFromMysqlDB } from "./getFromMysqlDB";
 import { getFromDynamoDB } from "./getFromDynamoDB";
 import { IS_OFFLINE } from "../../utils";
 
-module.exports.getClassroom = async event => {
+export const getClassroom = async event => {
   const classroomID = event.pathParameters.id;
 
   if (IS_OFFLINE === true) {
@@ -11,3 +11,5 @@ module.exports.getClassroom = async event => {
 
   return getFromDynamoDB(classroomID);
 };
+
+export default { getClassroom };

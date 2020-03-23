@@ -2,7 +2,7 @@ import { CONFIG_INSTANCE_TABLE, ReturnDocumentClient } from "../../utils";
 
 const documentClient = ReturnDocumentClient();
 
-module.exports.deleteFromDynamoDB = async instanceID => {
+export const deleteFromDynamoDB = async instanceID => {
   // DynamoDB operation
   const params = {
     TableName: CONFIG_INSTANCE_TABLE,
@@ -21,3 +21,5 @@ module.exports.deleteFromDynamoDB = async instanceID => {
     };
   }
 };
+
+export default { deleteFromDynamoDB };
