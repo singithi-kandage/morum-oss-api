@@ -6,7 +6,7 @@ import { insertIntoDynamoDB } from "./insertIntoDynamoDB";
 import { IS_OFFLINE } from "../../utils";
 
 module.exports.createInstance = async event => {
-  const { projectID, userID } = JSON.parse(event).body;
+  const { projectID, userID } = JSON.parse(event.body);
 
   // Generate unique id with no external dependencies
   const generateUUID = () => crypto.randomBytes(16).toString("hex");

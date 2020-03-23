@@ -3,7 +3,7 @@ import { getFromDynamoDB } from "./getFromDynamoDB";
 import { IS_OFFLINE } from "../../utils";
 
 module.exports.getClassroomUsers = async event => {
-  const classroomID = JSON.parse(event).pathParameters.classroomID;
+  const classroomID = event.pathParameters.classroomID;
 
   if (IS_OFFLINE === true) {
     return getFromMysqlDB(classroomID);
