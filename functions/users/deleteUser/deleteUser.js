@@ -2,8 +2,8 @@ import { deleteFromMysqlDB } from "./deleteFromMysqlDB";
 import { deleteFromDynamoDB } from "./deleteFromDynamoDB";
 import { IS_OFFLINE } from "../../utils";
 
-module.exports.deleteUser = async event => {
-  const id = JSON.parse(event).pathParameters.id;
+export const deleteUser = async event => {
+  const id = event.pathParameters.id;
 
   if (IS_OFFLINE === true) {
     return deleteFromMysqlDB(id);
@@ -11,3 +11,5 @@ module.exports.deleteUser = async event => {
 
   return deleteFromDynamoDB(id);
 };
+
+export default { deleteUser };

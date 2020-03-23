@@ -5,9 +5,8 @@ import { insertIntoMysqlDB } from "./insertIntoMysqlDB";
 import { insertIntoDynamoDB } from "./insertIntoDynamoDB";
 import { IS_OFFLINE } from "../../utils";
 
-module.exports.createUser = async event => {
-  const { email } = JSON.parse(event).body;
-
+export const createUser = async event => {
+  const { email } = JSON.parse(event.body);
   // Generate unique id with no external dependencies
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const userID = generateUUID();
@@ -20,3 +19,5 @@ module.exports.createUser = async event => {
 
   return insertIntoDynamoDB(user);
 };
+
+export default { createUser };

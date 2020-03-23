@@ -2,7 +2,7 @@ import { CONFIG_USER_TABLE, ReturnDocumentClient } from "../../utils";
 
 const documentClient = ReturnDocumentClient();
 
-module.exports.getFromDynamoDB = async userID => {
+export const getFromDynamoDB = async userID => {
   // DynamoDB operation
   const params = {
     TableName: CONFIG_USER_TABLE,
@@ -23,3 +23,5 @@ module.exports.getFromDynamoDB = async userID => {
     };
   }
 };
+
+export default { getFromDynamoDB };

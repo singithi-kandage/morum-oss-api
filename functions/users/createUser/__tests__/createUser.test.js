@@ -20,16 +20,16 @@ afterEach(() => {
   insertIntoMysqlDB.mockReset();
 });
 
-test("Correctly creates classroom", async () => {
+test("Correctly creates user", async () => {
   utils.IS_OFFLINE = true;
 
   const email = "test@gmail.com";
 
-  const event = JSON.stringify({
-    body: {
+  const event = {
+    body: JSON.stringify({
       email: email
-    }
-  });
+    })
+  };
 
   const result = await createUser(event);
 
@@ -42,11 +42,11 @@ test("insertIntoDynamoDB is called", async () => {
 
   const email = "test@gmail.com";
 
-  const event = JSON.stringify({
-    body: {
+  const event = {
+    body: JSON.stringify({
       email: email
-    }
-  });
+    })
+  };
 
   await createUser(event);
 
@@ -60,11 +60,11 @@ test("insertIntoMysqlDB is called", async () => {
 
   const email = "test@gmail.com";
 
-  const event = JSON.stringify({
-    body: {
+  const event = {
+    body: JSON.stringify({
       email: email
-    }
-  });
+    })
+  };
 
   await createUser(event);
 

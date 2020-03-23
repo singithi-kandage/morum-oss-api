@@ -27,9 +27,9 @@ test("Correctly deletes user", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const userID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: userID
-  });
+  const event = {
+    pathParameters: { id: userID }
+  };
 
   const result = await deleteUser(event);
 
@@ -43,9 +43,9 @@ test("deleteFromDynamoDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const userID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: userID
-  });
+  const event = {
+    pathParameters: { id: userID }
+  };
 
   await deleteUser(event);
 
@@ -60,9 +60,9 @@ test("deleteFromMysqlDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const userID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: userID
-  });
+  const event = {
+    pathParameters: { id: userID }
+  };
 
   await deleteUser(event);
 

@@ -1,7 +1,9 @@
 import { connect } from "../../connect";
 
-module.exports.getFromMysqlDB = id => {
+export const getFromMysqlDB = id => {
   // Mysql operation
-  const query = `SELECT * FROM user WHERE userID = ${id};`;
+  const query = `SELECT * FROM user WHERE userID = '${id}';`;
   return connect(query);
 };
+
+export default { getFromMysqlDB };

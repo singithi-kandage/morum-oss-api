@@ -1,13 +1,20 @@
+import {
+  CONFIG_MYSQL_ENDPOINT,
+  CONFIG_MYSQL_DATABASE,
+  CONFIG_MYSQL_USER,
+  CONFIG_MYSQL_PASSWORD
+} from "./utils";
+
 const mysql = require("serverless-mysql")({
   config: {
-    host: process.env.ENDPOINT,
-    database: process.env.DATABASE,
-    user: process.env.USER,
-    password: process.env.PASSWORD
+    host: CONFIG_MYSQL_ENDPOINT,
+    database: CONFIG_MYSQL_DATABASE,
+    user: CONFIG_MYSQL_USER,
+    password: CONFIG_MYSQL_PASSWORD
   }
 });
 
-module.exports.connect = async query => {
+export const connect = async query => {
   try {
     // Run query
     const results = await mysql.query(query);
@@ -21,8 +28,10 @@ module.exports.connect = async query => {
     };
   } catch (e) {
     return {
-      error: e,
-      statusCode: 500
+      statusCode: 500,
+      body: JSON.stringify(e)
     };
   }
 };
+
+export default { connect };

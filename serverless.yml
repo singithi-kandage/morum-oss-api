@@ -17,8 +17,23 @@ provider:
   runtime: nodejs12.x
   stage: ${self:custom.currentStage}
   region: ca-central-1
+  # iamRoleStatements: # permissions for all of your functions can be set here
+  # - Effect: Allow
+  #   Action: # Gives permission to DynamoDB tables in a specific region
+  #     - dynamodb:DescribeTable
+  #     - dynamodb:Query
+  #     - dynamodb:Scan
+  #     - dynamodb:GetItem
+  #     - dynamodb:PutItem
+  #     - dynamodb:UpdateItem
+  #     - dynamodb:DeleteItem
+  #   Resource: 'arn:aws:dynamodb:ca-central-1:*:*'
   environment:
     IS_OFFLINE: ${file(./config.${self:custom.currentStage}.json):IS_OFFLINE}
+    CONFIG_MYSQL_ENDPOINT: ${file(./config.${self:custom.currentStage}.json):CONFIG_MYSQL_ENDPOINT}
+    CONFIG_MYSQL_DATABASE: ${file(./config.${self:custom.currentStage}.json):CONFIG_MYSQL_DATABASE}
+    CONFIG_MYSQL_USER: ${file(./config.${self:custom.currentStage}.json):CONFIG_MYSQL_USER}
+    CONFIG_MYSQL_PASSWORD: ${file(./config.${self:custom.currentStage}.json):CONFIG_MYSQL_PASSWORD}
     CONFIG_DYNAMODB_ENDPOINT: ${file(./config.${self:custom.currentStage}.json):CONFIG_DYNAMODB_ENDPOINT}
     CONFIG_CLASSROOM_TABLE: ${file(./config.${self:custom.currentStage}.json):CONFIG_CLASSROOM_TABLE}
     CONFIG_CLASSROOM_USER_TABLE: ${file(./config.${self:custom.currentStage}.json):CONFIG_CLASSROOM_USER_TABLE}
@@ -26,22 +41,6 @@ provider:
     CONFIG_PROJECT_TABLE: ${file(./config.${self:custom.currentStage}.json):CONFIG_PROJECT_TABLE}
     CONFIG_TEMPLATE_TABLE: ${file(./config.${self:custom.currentStage}.json):CONFIG_TEMPLATE_TABLE}
     CONFIG_USER_TABLE: ${file(./config.${self:custom.currentStage}.json):CONFIG_USER_TABLE}
-
-# you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:ListBucket"
-#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:PutObject"
-#      Resource:
-#        Fn::Join:
-#          - ""
-#          - - "arn:aws:s3:::"
-#            - "Ref" : "ServerlessDeploymentBucket"
-#            - "/*"
 
 # packaging information
 package:
@@ -164,14 +163,14 @@ functions:
           cors: true
   # Templates endpoints
   createTemplate:
-    handler: ./functions/template/createTemplate/createTemplate.createTemplate
+    handler: ./functions/templates/createTemplate/createTemplate.createTemplate
     events:
       - http:
           path: template
           method: post
           cors: true
   getTemplate:
-    handler: ./functions/template/getTemplate/getTemplate.getProject
+    handler: ./functions/templates/getTemplate/getTemplate.getProject
     events:
       - http:
           path: template/{id}
@@ -193,7 +192,7 @@ functions:
           method: get
           cors: true
   deleteUser:
-    handler: ./functions/user/deleteUser/deleteUser.deleteUser
+    handler: ./functions/users/deleteUser/deleteUser.deleteUser
     events:
       - http:
           path: user/{id}
@@ -202,6 +201,7 @@ functions:
 
 # plugins
 plugins:
+  - serverless-webpack
   - serverless-dynamodb-local
   - serverless-offline
 

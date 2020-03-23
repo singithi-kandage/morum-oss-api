@@ -28,14 +28,14 @@ test("Correctly updates classroom", async () => {
   const id = generateUUID();
   const ownerID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: id,
-    body: {
+  const event = {
+    pathParameters: { id: id },
+    body: JSON.stringify({
       ownerID: ownerID,
       courseCode: "PROG2300",
       company: "Conestoga College"
-    }
-  });
+    })
+  };
 
   const result = await updateClassroom(event);
 
@@ -50,14 +50,14 @@ test("updateDynamoDB is called", async () => {
   const id = generateUUID();
   const ownerID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: id,
-    body: {
+  const event = {
+    pathParameters: { id: id },
+    body: JSON.stringify({
       ownerID: ownerID,
       courseCode: "PROG2300",
       company: "Conestoga College"
-    }
-  });
+    })
+  };
 
   await updateClassroom(event);
 
@@ -72,14 +72,14 @@ test("updateMysqlDB is called", async () => {
   const id = generateUUID();
   const ownerID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: id,
-    body: {
+  const event = {
+    pathParameters: { id: id },
+    body: JSON.stringify({
       ownerID: ownerID,
       courseCode: "PROG2300",
       company: "Conestoga College"
-    }
-  });
+    })
+  };
 
   await updateClassroom(event);
 

@@ -27,9 +27,9 @@ test("Correctly creates classroom", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const id = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: id
-  });
+  const event = {
+    pathParameters: { id: id }
+  };
 
   const result = await deleteClassroom(event);
 
@@ -43,9 +43,9 @@ test("deleteFromDynamoDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const id = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: id
-  });
+  const event = {
+    pathParameters: { id: id }
+  };
 
   await deleteClassroom(event);
 
@@ -60,9 +60,9 @@ test("deleteFromMysqlDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const id = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: id
-  });
+  const event = {
+    pathParameters: { id: id }
+  };
 
   await deleteClassroom(event);
 

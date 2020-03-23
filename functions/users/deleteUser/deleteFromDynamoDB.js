@@ -2,7 +2,7 @@ import { CONFIG_USER_TABLE, ReturnDocumentClient } from "../../utils";
 
 const documentClient = ReturnDocumentClient();
 
-module.exports.deleteFromDynamoDB = async userID => {
+export const deleteFromDynamoDB = async userID => {
   // DynamoDB operation
   const params = {
     TableName: CONFIG_USER_TABLE,
@@ -21,3 +21,5 @@ module.exports.deleteFromDynamoDB = async userID => {
     };
   }
 };
+
+export default { deleteFromDynamoDB };

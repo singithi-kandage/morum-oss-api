@@ -27,9 +27,9 @@ test("Correctly gets classroom", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const id = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: id
-  });
+  const event = {
+    pathParameters: { id: id }
+  };
 
   const result = await getClassroom(event);
 
@@ -43,10 +43,9 @@ test("getFromDynamoDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const id = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: id
-  });
-
+  const event = {
+    pathParameters: { id: id }
+  };
   await getClassroom(event);
 
   expect(IS_OFFLINE).toBe(false);
@@ -60,9 +59,9 @@ test("getFromMysqlDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const id = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: id
-  });
+  const event = {
+    pathParameters: { id: id }
+  };
 
   await getClassroom(event);
 

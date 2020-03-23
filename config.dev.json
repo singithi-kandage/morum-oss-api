@@ -1,5 +1,9 @@
 {
   "IS_OFFLINE": true,
+  "CONFIG_MYSQL_ENDPOINT": "localhost",
+  "CONFIG_MYSQL_DATABASE": "morumossdb",
+  "CONFIG_MYSQL_USER": "root",
+  "CONFIG_MYSQL_PASSWORD": "13kandageHall20",
   "CONFIG_DYNAMODB_ENDPOINT": "http://localhost:8000",
   "CONFIG_CLASSROOM_TABLE": "classroom",
   "CONFIG_CLASSROOM_USER_TABLE": "classroomUser",

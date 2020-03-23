@@ -27,13 +27,13 @@ test("Correctly creates classroom", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const ownerID = generateUUID();
 
-  const event = JSON.stringify({
-    body: {
+  const event = {
+    body: JSON.stringify({
       ownerID: ownerID,
       courseCode: "PROG2300",
       company: "Conestoga College"
-    }
-  });
+    })
+  };
 
   const result = await createClassroom(event);
 
@@ -47,13 +47,13 @@ test("insertIntoDynamoDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const ownerID = generateUUID();
 
-  const event = JSON.stringify({
-    body: {
+  const event = {
+    body: JSON.stringify({
       ownerID: ownerID,
       courseCode: "PROG2300",
       company: "Conestoga College"
-    }
-  });
+    })
+  };
 
   await createClassroom(event);
 
@@ -68,13 +68,13 @@ test("insertIntoMysqlDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const ownerID = generateUUID();
 
-  const event = JSON.stringify({
-    body: {
+  const event = {
+    body: JSON.stringify({
       ownerID: ownerID,
       courseCode: "PROG2300",
       company: "Conestoga College"
-    }
-  });
+    })
+  };
 
   await createClassroom(event);
 

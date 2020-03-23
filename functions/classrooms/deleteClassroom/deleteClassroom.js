@@ -3,7 +3,7 @@ import { deleteFromDynamoDB } from "./deleteFromDynamoDB";
 import { IS_OFFLINE } from "../../utils";
 
 module.exports.deleteClassroom = async event => {
-  const classroomID = JSON.parse(event).pathParameters.id;
+  const classroomID = event.pathParameters.id;
 
   if (IS_OFFLINE === true) {
     return deleteFromMysqlDB(classroomID);
