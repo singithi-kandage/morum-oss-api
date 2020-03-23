@@ -27,9 +27,9 @@ test("Correctly gets instance", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const instanceID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: instanceID
-  });
+  const event = {
+    pathParameters: { id: instanceID }
+  };
 
   const result = await getInstance(event);
 
@@ -43,9 +43,9 @@ test("getFromDynamoDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const instanceID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: instanceID
-  });
+  const event = {
+    pathParameters: { id: instanceID }
+  };
 
   await getInstance(event);
 
@@ -60,9 +60,9 @@ test("getFromMysqlDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const instanceID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: instanceID
-  });
+  const event = {
+    pathParameters: { id: instanceID }
+  };
 
   await getInstance(event);
 

@@ -28,12 +28,12 @@ test("Correctly creates classroom", async () => {
   const projectID = generateUUID();
   const userID = generateUUID();
 
-  const event = JSON.stringify({
-    body: {
+  const event = {
+    body: JSON.stringify({
       projectID: projectID,
       userID: userID
-    }
-  });
+    })
+  };
 
   const result = await createInstance(event);
 
@@ -48,12 +48,12 @@ test("insertIntoDynamoDB is called", async () => {
   const projectID = generateUUID();
   const userID = generateUUID();
 
-  const event = JSON.stringify({
-    body: {
+  const event = {
+    body: JSON.stringify({
       projectID: projectID,
       userID: userID
-    }
-  });
+    })
+  };
 
   await createInstance(event);
 
@@ -69,12 +69,12 @@ test("insertIntoMysqlDB is called", async () => {
   const projectID = generateUUID();
   const userID = generateUUID();
 
-  const event = JSON.stringify({
-    body: {
+  const event = {
+    body: JSON.stringify({
       projectID: projectID,
       userID: userID
-    }
-  });
+    })
+  };
 
   await createInstance(event);
 

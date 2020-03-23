@@ -29,13 +29,13 @@ test("Correctly deletes classroomUser", async () => {
   const classroomID = generateUUID();
   const index = 0;
 
-  const event = JSON.stringify({
+  const event = {
     pathParameters: id,
-    body: {
+    body: JSON.stringify({
       classroomID: classroomID,
       index: index
-    }
-  });
+    })
+  };
 
   const result = await deleteClassroomUser(event);
 
@@ -51,14 +51,14 @@ test("deleteFromDynamoDB is called", async () => {
   const classroomID = generateUUID();
   const index = 0;
 
-  const event = JSON.stringify({
+  const event = {
     pathParameters: id,
-    body: {
+    body: JSON.stringify({
       classroomID: classroomID,
       index: index
-    }
-  });
-  
+    })
+  };
+
   await deleteClassroomUser(event);
 
   expect(IS_OFFLINE).toBe(false);
@@ -74,13 +74,14 @@ test("deleteFromMysqlDB is called", async () => {
   const classroomID = generateUUID();
   const index = 0;
 
-  const event = JSON.stringify({
+  const event = {
     pathParameters: id,
-    body: {
+    body: JSON.stringify({
       classroomID: classroomID,
       index: index
-    }
-  });
+    })
+  };
+
   await deleteClassroomUser(event);
 
   expect(IS_OFFLINE).toBe(true);

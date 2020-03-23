@@ -29,13 +29,13 @@ test("Correctly gets classroomUser", async () => {
   const classroomID = generateUUID();
   const index = 0;
 
-  const event = JSON.stringify({
+  const event = {
     pathParameters: id,
-    body: {
+    body: JSON.stringify({
       classroomID: classroomID,
       index: index
-    }
-  });
+    })
+  };
 
   const result = await getClassroomUser(event);
 
@@ -51,13 +51,13 @@ test("getFromDynamoDB is called", async () => {
   const classroomID = generateUUID();
   const index = 0;
 
-  const event = JSON.stringify({
+  const event = {
     pathParameters: id,
-    body: {
+    body: JSON.stringify({
       classroomID: classroomID,
       index: index
-    }
-  });
+    })
+  };
 
   await getClassroomUser(event);
 
@@ -74,13 +74,13 @@ test("getFromMysqlDB is called", async () => {
   const classroomID = generateUUID();
   const index = 0;
 
-  const event = JSON.stringify({
+  const event = {
     pathParameters: id,
-    body: {
+    body: JSON.stringify({
       classroomID: classroomID,
       index: index
-    }
-  });
+    })
+  };
 
   await getClassroomUser(event);
 

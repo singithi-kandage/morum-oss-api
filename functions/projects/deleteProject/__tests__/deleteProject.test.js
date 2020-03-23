@@ -27,9 +27,9 @@ test("Correctly deletes project", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const projectID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: projectID
-  });
+  const event = {
+    pathParameters: { id: projectID }
+  };
 
   const result = await deleteProject(event);
 
@@ -43,9 +43,9 @@ test("deleteFromDynamoDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const projectID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: projectID
-  });
+  const event = {
+    pathParameters: { id: projectID }
+  };
 
   await deleteProject(event);
 
@@ -60,9 +60,9 @@ test("deleteFromMysqlDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const projectID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: projectID
-  });
+  const event = {
+    pathParameters: { id: projectID }
+  };
 
   await deleteProject(event);
 

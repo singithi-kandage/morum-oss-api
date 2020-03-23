@@ -27,9 +27,9 @@ test("Correctly gets classroomUsers", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const classroomID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: classroomID
-  });
+  const event = {
+    pathParameters: { classroomID: classroomID }
+  };
 
   const result = await getClassroomUsers(event);
 
@@ -37,22 +37,22 @@ test("Correctly gets classroomUsers", async () => {
   expect(result).toEqual(expected);
 });
 
-// test("getFromDynamoDB is called", async () => {
-//   utils.IS_OFFLINE = false;
+test("getFromDynamoDB is called", async () => {
+  utils.IS_OFFLINE = false;
 
-//   const generateUUID = () => crypto.randomBytes(16).toString("hex");
-//   const id = generateUUID();
+  const generateUUID = () => crypto.randomBytes(16).toString("hex");
+  const classroomID = generateUUID();
 
-//   const event = JSON.stringify({
-//     pathParameters: id
-//   });
+  const event = {
+    pathParameters: { classroomID: classroomID }
+  };
 
-//   await getClassroom(event);
+  await getClassroomUsers(event);
 
-//   expect(IS_OFFLINE).toBe(false);
-//   expect(getFromDynamoDB).toBeCalledTimes(1);
-//   expect(getFromMysqlDB).toBeCalledTimes(0);
-// });
+  expect(IS_OFFLINE).toBe(false);
+  expect(getFromDynamoDB).toBeCalledTimes(1);
+  expect(getFromMysqlDB).toBeCalledTimes(0);
+});
 
 test("getFromMysqlDB is called", async () => {
   utils.IS_OFFLINE = true;
@@ -60,11 +60,11 @@ test("getFromMysqlDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const classroomID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: classroomID
-  });
+  const event = {
+    pathParameters: { classroomID: classroomID }
+  };
 
-  const result = await getClassroomUsers(event);
+  await getClassroomUsers(event);
 
   expect(IS_OFFLINE).toBe(true);
   expect(getFromDynamoDB).toBeCalledTimes(0);

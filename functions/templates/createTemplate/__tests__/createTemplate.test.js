@@ -25,11 +25,11 @@ test("Correctly creates classroom", async () => {
 
   const name = "testTemplate";
 
-  const event = JSON.stringify({
-    body: {
+  const event = {
+    body: JSON.stringify({
       name: name
-    }
-  });
+    })
+  };
 
   const result = await createTemplate(event);
 
@@ -42,13 +42,13 @@ test("insertIntoDynamoDB is called", async () => {
 
   const name = "testTemplate";
 
-  const event = JSON.stringify({
-    body: {
+  const event = {
+    body: JSON.stringify({
       name: name
-    }
-  });
+    })
+  };
 
-  const result = await createTemplate(event);
+  await createTemplate(event);
 
   expect(IS_OFFLINE).toBe(false);
   expect(insertIntoDynamoDB).toBeCalledTimes(1);
@@ -60,13 +60,13 @@ test("insertIntoMysqlDB is called", async () => {
 
   const name = "testTemplate";
 
-  const event = JSON.stringify({
-    body: {
+  const event = {
+    body: JSON.stringify({
       name: name
-    }
-  });
+    })
+  };
 
-  const result = await createTemplate(event);
+  await createTemplate(event);
 
   expect(IS_OFFLINE).toBe(true);
   expect(insertIntoDynamoDB).toBeCalledTimes(0);

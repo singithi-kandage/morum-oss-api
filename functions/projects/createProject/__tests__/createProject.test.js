@@ -29,13 +29,13 @@ test("Correctly creates project", async () => {
   const templateID = generateUUID();
   const classroomID = generateUUID();
 
-  const event = JSON.stringify({
-    body: {
+  const event = {
+    body: JSON.stringify({
       containerID: containerID,
       templateID: templateID,
       classroomID: classroomID
-    }
-  });
+    })
+  };
 
   const result = await createProject(event);
 
@@ -51,13 +51,13 @@ test("insertIntoDynamoDB is called", async () => {
   const templateID = generateUUID();
   const classroomID = generateUUID();
 
-  const event = JSON.stringify({
-    body: {
+  const event = {
+    body: JSON.stringify({
       containerID: containerID,
       templateID: templateID,
       classroomID: classroomID
-    }
-  });
+    })
+  };
 
   await createProject(event);
 
@@ -74,13 +74,13 @@ test("insertIntoMysqlDB is called", async () => {
   const templateID = generateUUID();
   const classroomID = generateUUID();
 
-  const event = JSON.stringify({
-    body: {
+  const event = {
+    body: JSON.stringify({
       containerID: containerID,
       templateID: templateID,
       classroomID: classroomID
-    }
-  });
+    })
+  };
 
   await createProject(event);
 
@@ -88,4 +88,3 @@ test("insertIntoMysqlDB is called", async () => {
   expect(insertIntoDynamoDB).toBeCalledTimes(0);
   expect(insertIntoMysqlDB).toBeCalledTimes(1);
 });
-

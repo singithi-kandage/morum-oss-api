@@ -28,12 +28,12 @@ test("Correctly creates classroom", async () => {
   const userID = generateUUID();
   const classroomID = generateUUID();
 
-  const event = JSON.stringify({
-    body: {
+  const event = {
+    body: JSON.stringify({
       userID: userID,
       classroomID: classroomID
-    }
-  });
+    })
+  };
 
   const result = await createClassroomUser(event);
 
@@ -41,26 +41,26 @@ test("Correctly creates classroom", async () => {
   expect(result).toEqual(expected);
 });
 
-// test("insertIntoDynamoDB is called", async () => {
-//   utils.IS_OFFLINE = false;
+test("insertIntoDynamoDB is called", async () => {
+  utils.IS_OFFLINE = false;
 
-//   const generateUUID = () => crypto.randomBytes(16).toString("hex");
-//   const ownerID = generateUUID();
+  const generateUUID = () => crypto.randomBytes(16).toString("hex");
+  const userID = generateUUID();
+  const classroomID = generateUUID();
 
-//   const event = JSON.stringify({
-//     body: {
-//       ownerID: ownerID,
-//       courseCode: "PROG2300",
-//       company: "Conestoga College"
-//     }
-//   });
+  const event = {
+    body: JSON.stringify({
+      userID: userID,
+      classroomID: classroomID
+    })
+  };
 
-//   await createClassroom(event);
+  await createClassroomUser(event);
 
-//   expect(IS_OFFLINE).toBe(false);
-//   expect(insertIntoDynamoDB).toBeCalledTimes(1);
-//   expect(insertIntoMysqlDB).toBeCalledTimes(0);
-// });
+  expect(IS_OFFLINE).toBe(false);
+  expect(insertIntoDynamoDB).toBeCalledTimes(1);
+  expect(insertIntoMysqlDB).toBeCalledTimes(0);
+});
 
 test("insertIntoMysqlDB is called", async () => {
   utils.IS_OFFLINE = true;
@@ -69,12 +69,12 @@ test("insertIntoMysqlDB is called", async () => {
   const userID = generateUUID();
   const classroomID = generateUUID();
 
-  const event = JSON.stringify({
-    body: {
+  const event = {
+    body: JSON.stringify({
       userID: userID,
       classroomID: classroomID
-    }
-  });
+    })
+  };
 
   await createClassroomUser(event);
 

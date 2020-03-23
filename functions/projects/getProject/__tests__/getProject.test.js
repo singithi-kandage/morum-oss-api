@@ -27,9 +27,9 @@ test("Correctly gets classroom", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const projectID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: projectID
-  });
+  const event = {
+    pathParameters: { id: projectID }
+  };
 
   const result = await getProject(event);
 
@@ -43,9 +43,9 @@ test("getFromDynamoDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const projectID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: projectID
-  });
+  const event = {
+    pathParameters: { id: projectID }
+  };
 
   await getProject(event);
 
@@ -60,9 +60,9 @@ test("getFromMysqlDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const projectID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: projectID
-  });
+  const event = {
+    pathParameters: { id: projectID }
+  };
 
   await getProject(event);
 

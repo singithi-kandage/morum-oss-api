@@ -27,9 +27,9 @@ test("Correctly deletes instance", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const instanceID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: instanceID
-  });
+  const event = {
+    pathParameters: { id: instanceID }
+  };
 
   const result = await deleteInstance(event);
 
@@ -43,9 +43,9 @@ test("deleteFromDynamoDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const instanceID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: instanceID
-  });
+  const event = {
+    pathParameters: { id: instanceID }
+  };
 
   await deleteInstance(event);
 
@@ -60,9 +60,9 @@ test("deleteFromMysqlDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const instanceID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: instanceID
-  });
+  const event = {
+    pathParameters: { id: instanceID }
+  };
 
   await deleteInstance(event);
 

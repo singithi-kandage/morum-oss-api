@@ -27,9 +27,9 @@ test("Correctly gets classroom", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const templateID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: templateID
-  });
+  const event = {
+    pathParameters: { id: templateID }
+  };
 
   const result = await getTemplate(event);
 
@@ -43,9 +43,9 @@ test("getFromDynamoDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const templateID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: templateID
-  });
+  const event = {
+    pathParameters: { id: templateID }
+  };
 
   await getTemplate(event);
 
@@ -60,9 +60,9 @@ test("getFromMysqlDB is called", async () => {
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const templateID = generateUUID();
 
-  const event = JSON.stringify({
-    pathParameters: templateID
-  });
+  const event = {
+    pathParameters: { id: templateID }
+  };
 
   await getTemplate(event);
 

@@ -2,7 +2,7 @@ import { CONFIG_INSTANCE_TABLE, ReturnDocumentClient } from "../../utils";
 
 const documentClient = ReturnDocumentClient();
 
-export default getFromDynamoDB = async instanceID => {
+export const getFromDynamoDB = async instanceID => {
   // DynamoDB operation
   const params = {
     TableName: CONFIG_INSTANCE_TABLE,
@@ -24,4 +24,4 @@ export default getFromDynamoDB = async instanceID => {
   }
 };
 
-export const {getFromDynamoDB};
+export default { getFromDynamoDB };
