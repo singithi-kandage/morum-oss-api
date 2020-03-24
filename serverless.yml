@@ -170,7 +170,7 @@ functions:
           method: post
           cors: true
   getTemplate:
-    handler: ./functions/templates/getTemplate/getTemplate.getProject
+    handler: ./functions/templates/getTemplate/getTemplate.getTemplate
     events:
       - http:
           path: template/{id}

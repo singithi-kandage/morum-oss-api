@@ -7,7 +7,7 @@ export default class Project {
   }
 
   get projectID() {
-    return this._userID;
+    return this._projectID;
   }
 
   set projectID(value) {
