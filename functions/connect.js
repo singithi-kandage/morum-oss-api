@@ -18,13 +18,18 @@ export const connect = async query => {
   try {
     // Run query
     const results = await mysql.query(query);
+    let body = JSON.stringify({});
+
+    if (query.includes("SELECT")) {
+      body = JSON.stringify(results);
+    }
 
     // Run clean up function
     await mysql.end();
 
     return {
       statusCode: 200,
-      body: JSON.stringify(results)
+      body: body
     };
   } catch (e) {
     return {

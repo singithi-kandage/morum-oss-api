@@ -11,6 +11,7 @@
   "author": "Singithi Kandage, Aaron Bassett, Sean Dunham",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.650.0",
     "serverless-mysql": "^1.5.3",
     "source-map-support": "^0.5.16"
   },

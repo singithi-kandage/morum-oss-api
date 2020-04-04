@@ -45,7 +45,7 @@ provider:
 # packaging information
 package:
   exclude:
-    - node_modules/**
+    - node_modules
     - .dynamodb
   include:
     - functions/urls/**
@@ -206,6 +206,9 @@ plugins:
   - serverless-offline
 
 custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
   defaultStage: dev
   currentStage: ${opt:stage, self:custom.defaultStage}
   dynamodb:
@@ -244,10 +247,10 @@ resources:
       Properties:
         TableName: classroomUser
         AttributeDefinitions:
-          - AttributeName: classroomID
+          - AttributeName: id
             AttributeType: S
         KeySchema:
-          - AttributeName: classroomID
+          - AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
