@@ -25,16 +25,14 @@ test("Correctly creates project", async () => {
   utils.IS_OFFLINE = true;
 
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
-  const containerID = generateUUID();
   const templateID = generateUUID();
   const classroomID = generateUUID();
 
   const event = {
     body: JSON.stringify({
-      containerID: containerID,
       templateID: templateID,
-      classroomID: classroomID
-    })
+      classroomID: classroomID,
+    }),
   };
 
   const result = await createProject(event);
@@ -47,16 +45,14 @@ test("insertIntoDynamoDB is called", async () => {
   utils.IS_OFFLINE = false;
 
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
-  const containerID = generateUUID();
   const templateID = generateUUID();
   const classroomID = generateUUID();
 
   const event = {
     body: JSON.stringify({
-      containerID: containerID,
       templateID: templateID,
-      classroomID: classroomID
-    })
+      classroomID: classroomID,
+    }),
   };
 
   await createProject(event);
@@ -70,16 +66,14 @@ test("insertIntoMysqlDB is called", async () => {
   utils.IS_OFFLINE = true;
 
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
-  const containerID = generateUUID();
   const templateID = generateUUID();
   const classroomID = generateUUID();
 
   const event = {
     body: JSON.stringify({
-      containerID: containerID,
       templateID: templateID,
-      classroomID: classroomID
-    })
+      classroomID: classroomID,
+    }),
   };
 
   await createProject(event);

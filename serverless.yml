@@ -34,6 +34,7 @@ provider:
     CONFIG_MYSQL_DATABASE: ${file(./config.${self:custom.currentStage}.json):CONFIG_MYSQL_DATABASE}
     CONFIG_MYSQL_USER: ${file(./config.${self:custom.currentStage}.json):CONFIG_MYSQL_USER}
     CONFIG_MYSQL_PASSWORD: ${file(./config.${self:custom.currentStage}.json):CONFIG_MYSQL_PASSWORD}
+    CONFIG_S3_BUCKET: ${file(./config.${self:custom.currentStage}.json):CONFIG_S3_BUCKET}
     CONFIG_DYNAMODB_ENDPOINT: ${file(./config.${self:custom.currentStage}.json):CONFIG_DYNAMODB_ENDPOINT}
     CONFIG_CLASSROOM_TABLE: ${file(./config.${self:custom.currentStage}.json):CONFIG_CLASSROOM_TABLE}
     CONFIG_CLASSROOM_USER_TABLE: ${file(./config.${self:custom.currentStage}.json):CONFIG_CLASSROOM_USER_TABLE}

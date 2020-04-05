@@ -12,11 +12,11 @@ test("Correctly calls insertIntoMysqlDB", async () => {
   // Generate unique id with no external dependencies
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
   const projectID = generateUUID();
-  const containerID = generateUUID();
+  const status = "Pending";
   const templateID = generateUUID();
   const classroomID = generateUUID();
 
-  const project = new Project(projectID, containerID, templateID, classroomID);
+  const project = new Project(projectID, status, templateID, classroomID);
 
   const result = await insertIntoMysqlDB(project);
 

@@ -4,6 +4,7 @@
   "CONFIG_MYSQL_DATABASE": "",
   "CONFIG_MYSQL_USER": "",
   "CONFIG_MYSQL_PASSWORD": "",
+  "CONFIG_S3_BUCKET": "builder-source",
   "CONFIG_DYNAMODB_ENDPOINT": "",
   "CONFIG_CLASSROOM_TABLE": "classroom",
   "CONFIG_CLASSROOM_USER_TABLE": "classroomUser",

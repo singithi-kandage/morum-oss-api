@@ -6,6 +6,7 @@ export const CONFIG_MYSQL_ENDPOINT = process.env.CONFIG_MYSQL_ENDPOINT;
 export const CONFIG_MYSQL_DATABASE = process.env.CONFIG_MYSQL_DATABASE;
 export const CONFIG_MYSQL_USER = process.env.CONFIG_MYSQL_USER;
 export const CONFIG_MYSQL_PASSWORD = process.env.CONFIG_MYSQL_PASSWORD;
+export const CONFIG_S3_BUCKET = process.env.CONFIG_S3_BUCKET ?? 'builder-source';
 
 export const CONFIG_DYNAMODB_ENDPOINT = process.env.CONFIG_DYNAMODB_ENDPOINT;
 export const CONFIG_CLASSROOM_TABLE = process.env.CONFIG_CLASSROOM_TABLE;

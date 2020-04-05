@@ -1,7 +1,7 @@
 export default class Project {
-  constructor(projectID, containerID, templateID, classroomID) {
+  constructor(projectID, status, templateID, classroomID) {
     this.projectID = projectID;
-    this.containerID = containerID;
+    this.status = status;
     this.templateID = templateID;
     this.classroomID = classroomID;
   }
@@ -14,12 +14,12 @@ export default class Project {
     this._projectID = value;
   }
 
-  get containerID() {
-    return this._containerID;
+  get status() {
+    return this._status;
   }
 
-  set containerID(value) {
-    this._containerID = value;
+  set status(value) {
+    this._status = value;
   }
 
   get templateID() {

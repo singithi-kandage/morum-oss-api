@@ -1,16 +1,20 @@
 import crypto from "crypto";
 import User from "../../../../models/user";
 import { insertIntoMysqlDB } from "../insertIntoMysqlDB";
-import { connect } from "../../../connect";
+import { connect } from "../connect";
 
-jest.mock("../../../connect.js");
+jest.mock("../connect.js");
 
 test("Correctly calls insertIntoMysqlDB", async () => {
-  const expected = { statusCode: 200 };
-  connect.mockReturnValue(expected);
-
   // Generate unique id with no external dependencies
   const generateUUID = () => crypto.randomBytes(16).toString("hex");
+
+  const expected = {
+    statusCode: 200,
+    body: JSON.stringify({ userID: generateUUID() }),
+  };
+  connect.mockReturnValue(expected);
+
   const userID = generateUUID();
   const email = "test@gmail.com";
 
