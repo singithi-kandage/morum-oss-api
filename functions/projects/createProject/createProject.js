@@ -5,7 +5,7 @@ import { insertIntoMysqlDB } from "./insertIntoMysqlDB";
 import { insertIntoDynamoDB } from "./insertIntoDynamoDB";
 import { IS_OFFLINE } from "../../utils";
 
-export const createProject = async event => {
+export const createProject = async (event) => {
   const { containerID, templateID, classroomID } = JSON.parse(event.body);
 
   // Generate unique id with no external dependencies
